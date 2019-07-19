@@ -8,6 +8,7 @@ import { environment } from './../environments/environment';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth.service';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { HomeComponent } from './home/home.component';
@@ -48,7 +49,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
       { path: 'admin/orders', component: AdminOrdersComponent }
     ])
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

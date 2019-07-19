@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand">Shopping Platform</a>
+
   <button
     class="navbar-toggler"
     type="button"
@@ -14,10 +15,12 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link">Link</a>
-      </li>
-      <li class="nav-item dropdown">
+      <ng-template #anonymousUser>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      </ng-template>
+      <li class="nav-item dropdown" *ngIf="auth.user$ | async as user; else anonymousUser">
         <a
           class="nav-link dropdown-toggle"
           id="navbarDropdown"
@@ -26,13 +29,13 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Username
+          {{ user.displayName }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item">Action</a>
-          <a class="dropdown-item">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item">Something else here</a>
+          <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
+          <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+          <a class="dropdown-item" routerLink="/admin/products">Manage products</a>
+          <a class="dropdown-item" click="logout()">Log Out</a>
         </div>
       </li>
       <li class="nav-item">
