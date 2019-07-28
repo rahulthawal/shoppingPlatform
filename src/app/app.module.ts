@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { environment } from './../environments/environment';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { CheckOutComponent } from './check-out/check-out.component';
@@ -18,9 +19,9 @@ import { ProductsComponent } from './products/products.component';
 import { AdminAuthGuardService } from './services/admin-auth-guard/admin-auth-guard.service';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AuthService } from './services/auth/auth.service';
+import { CategoryService } from './services/category/category.service';
 import { UserService } from './services/user/user.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -50,8 +52,11 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
       { path: 'login', component: LoginComponent },
       {
         path: 'admin/products',
-        component: AdminProductsComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]
+        component: AdminProductsComponent
+      },
+      {
+        path: 'admin/products/new',
+        component: ProductFormComponent
       },
       {
         path: 'admin/orders',
@@ -60,7 +65,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
       }
     ])
   ],
-  providers: [AuthService, UserService, AuthGuardService, AdminAuthGuardService],
+  providers: [AuthService, UserService, AuthGuardService, AdminAuthGuardService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
