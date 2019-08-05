@@ -17,12 +17,12 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
-import { ProductService } from './product.service';
 import { ProductsComponent } from './products/products.component';
 import { AdminAuthGuardService } from './services/admin-auth-guard/admin-auth-guard.service';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AuthService } from './services/auth/auth.service';
 import { CategoryService } from './services/category/category.service';
+import { ProductService } from './services/product/product.service';
 import { UserService } from './services/user/user.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
@@ -57,12 +57,16 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
       { path: 'order-success', component: OrderSuccessComponent },
       { path: 'login', component: LoginComponent },
       {
-        path: 'admin/products',
-        component: AdminProductsComponent
-      },
-      {
         path: 'admin/products/new',
         component: ProductFormComponent
+      },
+      {
+        path: 'admin/products/:id',
+        component: ProductFormComponent
+      },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent
       },
       {
         path: 'admin/orders',

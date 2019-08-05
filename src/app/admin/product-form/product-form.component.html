@@ -76,5 +76,13 @@
       <button type="button" class="btn btn-danger">Delete</button>
     </form>
   </div>
-  <div class="col-md-4"></div>
+  <div class="col-md-6">
+    <div class="card">
+      <img class="card-img-top" [src]="imageUrl.value" />
+      <div class="card-body">
+        <h4 class="card-title">{{ title.value }}</h4>
+        <p class="card-text">{{ price.value | currency }}</p>
+      </div>
+    </div>
+  </div>
 </div>
