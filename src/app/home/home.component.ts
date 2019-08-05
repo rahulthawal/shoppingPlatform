@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  items: Observable<any[]>;
-
-  constructor(private db: AngularFireDatabase) {
-    this.getAll();
-  }
+  constructor() {}
 
   ngOnInit() {}
-  getAll() {
-    this.items = this.db.list('/products').valueChanges();
-  }
 }

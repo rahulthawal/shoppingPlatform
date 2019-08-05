@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { map } from 'rxjs/internal/operators/map';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
@@ -7,23 +9,31 @@ import { ProductService } from 'src/app/services/product/product.service';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
-  products$;
+export class AdminProductsComponent implements OnInit, OnDestroy {
+  products: Product[];
+  filteredProducts: Product[];
+  prodSubscription: Subscription;
   constructor(private productService: ProductService) {
-    this.products$ = this.productService.getAll().pipe(
-      map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-      })
-    );
-    // this.courseRef = db.list('/courses');
-    //   this.courses$ = this.courseRef.snapshotChanges().map(changes => {
-    //       return changes.map(c => ({ key: c.payload.key, ...c.payload.val()
-    //   }));
-    //  });
+    this.prodSubscription = this.productService
+      .getAll()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ key: c.payload.key, ...c.payload.val() } as Product));
+        })
+      )
+      .subscribe(products => {
+        this.filteredProducts = this.products = products;
+      });
   }
-  ngOnInit() {
-    this.products$.subscribe(p => {
-      console.log('Products', p);
-    });
+  filter(query: string) {
+    this.filteredProducts = query
+      ? this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
+      : this.products;
+  }
+
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.prodSubscription.unsubscribe();
   }
 }
