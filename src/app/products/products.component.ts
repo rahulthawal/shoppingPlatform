@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product/product.service';
@@ -8,7 +8,7 @@ import { ProductService } from '../services/product/product.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   products: Product[] = [];
   filterProducts: Product[] = [];
 
@@ -26,6 +26,4 @@ export class ProductsComponent implements OnInit {
       });
     });
   }
-
-  ngOnInit() {}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { CategoryService } from 'src/app/services/category/category.service';
@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/services/product/product.service';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent {
   categories$;
   product = {};
   id: string;
@@ -29,8 +29,6 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
-
   save(product) {
     if (this.id) {
       this.productService.update(this.id, product);
@@ -39,6 +37,7 @@ export class ProductFormComponent implements OnInit {
     }
     this.router.navigate(['/admin/products']);
   }
+
   delete() {
     if (!confirm('Are you sure you want to delete this product?')) {
       return;
