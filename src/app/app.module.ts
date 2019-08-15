@@ -25,10 +25,11 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AuthService } from './services/auth/auth.service';
 import { CategoryService } from './services/category/category.service';
 import { ProductService } from './services/product/product.service';
+import { ShoppingCartService } from './services/shopping-cart/shopping-cart.service';
 import { UserService } from './services/user/user.service';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { ProductFilterComponent } from './shared/product-filter/product-filter.component';
 import { ProductCardComponent } from './shared/product-card/product-card.component';
+import { ProductFilterComponent } from './shared/product-filter/product-filter.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { ProductCardComponent } from './shared/product-card/product-card.compone
     AuthGuardService,
     AdminAuthGuardService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
