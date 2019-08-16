@@ -15,11 +15,12 @@ export class ShoppingCartService {
     });
   }
 
-  async getCart(cartId: string) {
-    return this.db.object('/shopping-carts/' + cartId).snapshotChanges();
+  async getCart() {
+    const cartId = await this.getOrCreateCartId();
+    return this.db.object('/shopping-carts/' + cartId).valueChanges();
   }
 
-  private async getOrCreateCartId() {
+  private async getOrCreateCartId(): Promise<string> {
     const cartId = localStorage.getItem('cartId');
     if (!cartId) {
       const result = await this.create();
@@ -29,16 +30,16 @@ export class ShoppingCartService {
     return cartId;
   }
 
+  private getItem(cartId: string, productKey: string) {
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productKey);
+  }
+
   async addToCart(product: Product) {
     const cartId = await this.getOrCreateCartId();
-    const itemRef = this.db.object('/shopping-carts/' + cartId + '/items/' + product.key);
+    const itemRef = this.getItem(cartId, product.key);
     const item$ = itemRef.snapshotChanges();
     item$.pipe(take(1)).subscribe(item => {
-      if (item.payload.exists()) {
-        itemRef.update({ quantity: item.payload.val()['quantity'] + 1 });
-      } else {
-        itemRef.set({ product: product, quantity: 1 });
-      }
+      itemRef.update({ product: product, quantity: (item.payload.val()['quantity'] || 0) + 1 });
     });
   }
 }

@@ -11,14 +11,12 @@
       {{ product.price | currency }}
     </p>
   </div>
-  <div class="card-footer">
-    <button
-      *ngIf="showActions"
-      href="#"
-      class="btn btn-primary btn-block"
-      (click)="addToCart(product)"
-    >
+  <div *ngIf="showActions" class="card-footer">
+    <button href="#" class="btn btn-primary btn-block" (click)="addToCart(product)">
       Add to Cart
     </button>
+    <div>
+      {{ getQuantity() }}
+    </div>
   </div>
 </div>

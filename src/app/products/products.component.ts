@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product/product.service';
+import { ShoppingCartService } from '../services/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filterProducts: Product[] = [];
-
+  shoppingCart: any;
   category: string;
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private cartService: ShoppingCartService
+  ) {
     this.productService
       .getAll()
       .pipe(
@@ -32,5 +38,10 @@ export class ProductsComponent {
             : this.products;
         });
       });
+  }
+  async ngOnInit() {
+    (await this.cartService.getCart()).subscribe(shoppingCart => {
+      this.shoppingCart = shoppingCart;
+    });
   }
 }
