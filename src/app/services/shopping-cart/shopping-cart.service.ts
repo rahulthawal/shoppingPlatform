@@ -39,7 +39,7 @@ export class ShoppingCartService {
     const itemRef = this.getItem(cartId, product.key);
     const item$ = itemRef.snapshotChanges();
     item$.pipe(take(1)).subscribe(item => {
-      itemRef.update({ product: product, quantity: (item.payload.val()['quantity'] || 0) + 1 });
+      itemRef.update({ product: product, quantity: (item.payload.numChildren() || 0) + 1 });
     });
   }
 }
