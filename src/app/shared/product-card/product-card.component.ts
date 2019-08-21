@@ -14,8 +14,12 @@ export class ProductCardComponent implements OnInit {
 
   constructor(private cartService: ShoppingCartService) {}
 
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
+  removeFromCart() {
+    this.cartService.removeFromCart(this.product);
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.product);
   }
 
   getQuantity() {
