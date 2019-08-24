@@ -56,12 +56,10 @@ export class ShoppingCartService {
 
   private async updateItemQuantity(product: Product, change: number) {
     const cartId = await this.getOrCreateCartId();
-    console.log('Cartid', cartId);
     const itemRef = this.getItem(cartId, product.key);
 
     const item$ = itemRef.snapshotChanges();
     item$.pipe(take(1)).subscribe(item => {
-      console.log('item', item);
       itemRef.update({
         product: product,
         quantity: (item.payload.val()['quantity'] || 0) + change
