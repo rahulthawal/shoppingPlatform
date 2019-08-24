@@ -19,10 +19,17 @@ export class ShoppingCartService {
 
   async getCart(): Promise<Observable<ShoppingCart>> {
     const cartId = await this.getOrCreateCartId();
-    return this.db
+    const cart = this.db
       .object('/shopping-carts/' + cartId)
-      .valueChanges()
-      .pipe(map(x => new ShoppingCart(x.items)));
+      .snapshotChanges()
+      .pipe(
+        map((result: any) => {
+          const key = result.key;
+          const items = result.payload.val().items;
+          return new ShoppingCart(key, items);
+        })
+      );
+    return cart;
   }
 
   private async getOrCreateCartId(): Promise<string> {
