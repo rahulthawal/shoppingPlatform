@@ -10,8 +10,8 @@
       (click)="addToCart()"
       class="btn btn-secondary btn-block">Add to Cart</button>
     <ng-template #updateQuantity>
-      <product-quantity [product]="product" [shopping-cart]="shoppingCart">
-      </product-quantity>
+      <app-product-quantity [product]="product" [shoppingCart]="shoppingCart">
+      </app-product-quantity>
     </ng-template>
   </div>
 </div>    

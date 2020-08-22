@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../models/product';
 import { ShoppingCartService } from '../services/shopping-cart/shopping-cart.service';
-import { ShoppingCart } from '../models/shopping-cart';
 
 @Component({
   selector: 'app-product-quantity',
@@ -11,7 +10,6 @@ import { ShoppingCart } from '../models/shopping-cart';
 export class ProductQuantityComponent implements OnInit {
 
   @Input() product: Product;
-  @Input() shoppingCart: ShoppingCart;
 
   ngOnInit(): void {
   }
