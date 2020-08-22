@@ -26,7 +26,7 @@ export class ShoppingCartService {
         map((result: any) => {
           const key = result.key;
           const items = result.payload.val().items;
-          return new ShoppingCart(key, items);
+          return new ShoppingCart(key);
         })
       );
     return cart;
@@ -56,7 +56,7 @@ export class ShoppingCartService {
 
   private async updateItemQuantity(product: Product, change: number) {
     const cartId = await this.getOrCreateCartId();
-    const itemRef = this.getItem(cartId, product.key);
+    const itemRef = this.getItem(cartId, product.$key);
 
     const item$ = itemRef.snapshotChanges();
     item$.pipe(take(1)).subscribe(item => {

@@ -6,13 +6,14 @@
       <tr>
         <th>Product</th>
         <th>Quantity</th>
-        <th></th>
+        <th>Price</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let productId of cart.productIds">
-        <td>{{ cart.items[productId].product.title }}</td>
-        <td>{{ cart.items[productId].quantity }}</td>
+      <tr *ngFor="let item of cart.items">
+        <td>{{ item.product.title }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price }}</td>
       </tr>
     </tbody>
   </table>
