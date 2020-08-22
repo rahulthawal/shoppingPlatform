@@ -24,9 +24,8 @@ export class ShoppingCartService {
       .snapshotChanges()
       .pipe(
         map((result: any) => {
-          const key = result.key;
           const items = result.payload.val().items;
-          return new ShoppingCart(key);
+          return new ShoppingCart(items);
         })
       );
     return cart;
@@ -54,6 +53,11 @@ export class ShoppingCartService {
     this.updateItemQuantity(product, -1);
   }
 
+  async clearCart() {
+    const cartId = await this.getOrCreateCartId();
+    this.db.object('/shopping-carts/' + cartId + '/items').remove();
+  }
+  
   private async updateItemQuantity(product: Product, change: number) {
     const cartId = await this.getOrCreateCartId();
     const itemRef = this.getItem(cartId, product.$key);

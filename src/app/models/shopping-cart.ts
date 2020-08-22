@@ -31,12 +31,12 @@ export class ShoppingCart {
   }
 
   get totalItemsCount() {
-    let count = 0;
+    let cartItem = 0;
     for (const productId in this.cartId) {
       if (productId) {
-        count += this.cartId[productId].quantity;
+        cartItem += this.cartId[productId].quantity;
       }
     }
-    return count;
+    return cartItem;
   }
 }
