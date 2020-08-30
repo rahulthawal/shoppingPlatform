@@ -93,8 +93,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     AdminAuthGuardService,
     CategoryService,
     ProductService,
-    ShoppingCartService,
-    { provide: DEFAULT_CURRENCY_CODE, useValue: 'USD ' }
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
