@@ -26,7 +26,7 @@
           {{ item.title }}
         </td>
         <td>
-          <app-product-quantity [product]="item" [cart]="cart">
+          <app-product-quantity [product]="item" [shoppingCart]="cart">
           </app-product-quantity>
         </td>
         <td class="text-right">
@@ -39,7 +39,7 @@
         <th></th>
         <th></th>
         <th></th>
-        <th class="text-right">{{ cart.totalPrice | currency:'USD':true }}</th>
+        <th class="text-right">{{ cart.totalPrice | currencyPipe:'USD':true }}</th>
       </tr>
     </tfoot> 
   </table>

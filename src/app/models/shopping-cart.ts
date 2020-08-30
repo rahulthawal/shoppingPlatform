@@ -16,8 +16,10 @@ export class ShoppingCart {
   }
 
   getQuantity(product: Product) {
-    const item = this.cartId[product.$key];
-    return item ? item.quantity : 0;
+    if (product) {
+      const item = this.cartId[product.title];
+      return item ? item.quantity : 0;
+    }
   }
 
   get totalPrice() {

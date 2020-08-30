@@ -4,6 +4,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product/product.service';
 import { ShoppingCartService } from '../services/shopping-cart/shopping-cart.service';
+import { ShoppingCart } from '../models/shopping-cart';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,7 @@ import { ShoppingCartService } from '../services/shopping-cart/shopping-cart.ser
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filterProducts: Product[] = [];
-  shoppingCart: any;
+  shoppingCart: ShoppingCart;
   category: string;
 
   constructor(
