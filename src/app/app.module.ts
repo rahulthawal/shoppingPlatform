@@ -34,6 +34,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
 import { OrderService } from './services/order/order.service';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -56,13 +57,13 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
     ShoppingCartSummaryComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     FormsModule,
     CustomFormsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
-    // NgbModule.forRoot(),
     DataTableModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: ProductsComponent },
